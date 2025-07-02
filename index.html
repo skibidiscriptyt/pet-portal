@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>🐣 Pet Portal 🐣</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f0f8ff;
+      padding: 50px;
+    }
+    .ui-box {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      margin: auto;
+      width: 300px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .btn {
+      background: #98fb98;
+      border: none;
+      border-radius: 12px;
+      padding: 15px 20px;
+      margin: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .btn:hover {
+      background: #90ee90;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ui-box" id="main">
+    <h2>🐣 Pet 🐣</h2>
+    <button class="btn" onclick="showPets()">Click Me</button>
+  </div>
+
+  <script>
+    function showPets() {
+      document.getElementById('main').innerHTML = `
+        <h2>Select a Pet</h2>
+        <button class="btn" onclick="selectPet('Raccoon')">🦝 Raccoon</button>
+        <button class="btn" onclick="selectPet('Bunny')">🐰 Bunny</button>
+      `;
+    }
+
+    function selectPet(petName) {
+      document.getElementById('main').innerHTML = `
+        <h2>${petName}</h2>
+        <input placeholder="Enter your username" id="username" style="padding:10px; border-radius:10px;" /><br><br>
+        <button class="btn" onclick="showPets()">❌ Cancel</button><br>
+        <button class="btn" onclick="confirmUser('${petName}')">Next ➡️</button>
+      `;
+    }
+
+    function confirmUser(petName) {
+      const username = document.getElementById('username').value;
+      if (!username) return alert('Enter a username!');
+
+      // Replace below with real avatar if needed
+      const avatar = `https://robohash.org/${username}?set=set4`; // fake avatar for now
+
+      document.getElementById('main').innerHTML = `
+        <h2>Is This You?</h2>
+        <img src="${avatar}" width="100" style="border-radius:20px;" /><br><br>
+        <button class="btn" onclick="selectPet('${petName}')">Not Me</button><br>
+        <button class="btn" onclick="showInvite('${petName}')">That's Me ✅</button>
+      `;
+    }
+
+    function showInvite(petName) {
+      document.getElementById('main').innerHTML = `
+        <h2>Join the Private Server</h2>
+        <p>Here’s your invite link:</p>
+        <a href="https://discord.gg/YOUR-BOT-LINK" target="_blank">Join Discord</a><br><br>
+        <p>The bot will give you a free ${petName} — no money, no tasks!</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
